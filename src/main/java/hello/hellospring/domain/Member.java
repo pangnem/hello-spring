@@ -33,6 +33,6 @@ public class Member {
     }
 
     public MemberFindResponse toFindResponse() {
-        return new MemberFindResponse(this.name);
+        return new MemberFindResponse(this.id, this.name);
     }
 }

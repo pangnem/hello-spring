@@ -3,10 +3,20 @@ package hello.hellospring.dto;
 import java.util.Objects;
 
 public class MemberFindResponse {
+    private final long id;
     private final String name;
 
-    public MemberFindResponse(String name) {
+    public MemberFindResponse(long id, String name) {
+        this.id = id;
         this.name = name;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -20,11 +30,11 @@ public class MemberFindResponse {
         }
 
         MemberFindResponse that = (MemberFindResponse) o;
-        return Objects.equals(name, that.name);
+        return id == that.id && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(id, name);
     }
 }

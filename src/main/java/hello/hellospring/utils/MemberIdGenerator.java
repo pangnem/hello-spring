@@ -18,11 +18,11 @@ public class MemberIdGenerator {
         return sequence.get();
     }
 
-    private static void increaseSequence() {
-        sequence.set(sequence.get() + INCREASE_VALUE);
-    }
-
     public static void init() {
         sequence = new AtomicLong(INITIAL_VALUE);
+    }
+
+    private static void increaseSequence() {
+        sequence.set(sequence.get() + INCREASE_VALUE);
     }
 }

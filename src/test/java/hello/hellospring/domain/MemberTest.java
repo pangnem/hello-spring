@@ -62,7 +62,7 @@ class MemberTest {
 
             MemberFindResponse memberFindResponse = member.toFindResponse();
 
-            assertThat(memberFindResponse).isEqualTo(new MemberFindResponse("memberName"));
+            assertThat(memberFindResponse).isEqualTo(new MemberFindResponse(1L, "memberName"));
         }
     }
 
