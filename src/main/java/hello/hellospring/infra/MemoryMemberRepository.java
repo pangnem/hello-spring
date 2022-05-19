@@ -2,20 +2,20 @@ package hello.hellospring.infra;
 
 import hello.hellospring.domain.Member;
 import hello.hellospring.domain.MemberRepository;
+import hello.hellospring.utils.MemberIdGenerator;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 
+@Repository
 public class MemoryMemberRepository implements MemberRepository {
     private static final Map<Long, Member> store = new ConcurrentHashMap<>();
-    private static final AtomicLong sequence = new AtomicLong(0);
 
     @Override
     public Member save(Member member) {
-        increaseSequence();
         member.saveTo(store);
 
         return member;
@@ -42,9 +42,6 @@ public class MemoryMemberRepository implements MemberRepository {
     @Override
     public void deleteAll() {
         store.clear();
-    }
-
-    private void increaseSequence() {
-        sequence.set(sequence.get());
+        MemberIdGenerator.init();
     }
 }

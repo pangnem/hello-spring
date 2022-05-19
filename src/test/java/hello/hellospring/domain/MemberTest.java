@@ -1,6 +1,7 @@
 package hello.hellospring.domain;
 
-import hello.hellospring.TestMemberFactory;
+import hello.hellospring.dto.MemberFindResponse;
+import hello.hellospring.dto.MemberJoinResponse;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -37,6 +38,32 @@ class MemberTest {
             }
         }
 
+    }
+
+    @Nested
+    class toJoinResponse {
+
+        @Test
+        void 회원가입_응답_리턴() {
+            Member member = TestMemberFactory.create();
+
+            MemberJoinResponse memberJoinResponse = member.toJoinResponse();
+            
+            assertThat(memberJoinResponse).isEqualTo(new MemberJoinResponse(1L));
+        }
+    }
+
+    @Nested
+    class toFindResponse {
+
+        @Test
+        void 멤버조회_응답_리턴() {
+            Member member = TestMemberFactory.create();
+
+            MemberFindResponse memberFindResponse = member.toFindResponse();
+
+            assertThat(memberFindResponse).isEqualTo(new MemberFindResponse("memberName"));
+        }
     }
 
 }

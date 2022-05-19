@@ -1,8 +1,8 @@
 package hello.hellospring.infra;
 
-import hello.hellospring.TestMemberFactory;
 import hello.hellospring.domain.Member;
 import hello.hellospring.domain.MemberRepository;
+import hello.hellospring.domain.TestMemberFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

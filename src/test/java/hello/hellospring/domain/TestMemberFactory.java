@@ -1,6 +1,4 @@
-package hello.hellospring;
-
-import hello.hellospring.domain.Member;
+package hello.hellospring.domain;
 
 public class TestMemberFactory {
     public static Member create() {
