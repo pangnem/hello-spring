@@ -5,8 +5,6 @@ import hello.hellospring.domain.MemberRepository;
 import hello.hellospring.domain.MemberTest;
 import hello.hellospring.dto.MemberFindResponse;
 import hello.hellospring.dto.MemberJoinRequest;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,16 +24,6 @@ class MemberServiceIntegrationTest {
     private MemberRepository memberRepository;
     @Autowired
     private MemberService memberService;
-
-    @BeforeEach
-    void setUp() {
-        this.memberRepository.deleteAll();
-    }
-
-    @AfterEach
-    void tearDown() {
-        this.memberRepository.deleteAll();
-    }
 
     @Nested
     class join_메서드는 {
