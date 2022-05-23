@@ -49,7 +49,7 @@ public class Member {
         return new MemberFindResponse(this.id, this.name);
     }
 
-    public long id() {
+    public Long id() {
         return this.id;
     }
 }
