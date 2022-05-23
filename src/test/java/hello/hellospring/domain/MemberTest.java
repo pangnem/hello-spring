@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class MemberTest {
+public class MemberTest {
+    public static final Member MEMBER1 = new Member(1L, "memberName");
+    public static final Member MEMBER2 = new Member("memberName");
 
     @Nested
     class matchName {
@@ -17,9 +19,7 @@ class MemberTest {
 
             @Test
             void returnsTrue() {
-                Member member = TestMemberFactory.create();
-
-                boolean actual = member.matchName("memberName");
+                boolean actual = MEMBER1.matchName("memberName");
 
                 assertThat(actual).isTrue();
             }
@@ -30,9 +30,7 @@ class MemberTest {
 
             @Test
             void returnsFalse() {
-                Member member = TestMemberFactory.create();
-
-                boolean actual = member.matchName("xxxxx");
+                boolean actual = MEMBER1.matchName("xxxxx");
 
                 assertThat(actual).isFalse();
             }
@@ -45,9 +43,7 @@ class MemberTest {
 
         @Test
         void 회원가입_응답_리턴() {
-            Member member = TestMemberFactory.create();
-
-            MemberJoinResponse memberJoinResponse = member.toJoinResponse();
+            MemberJoinResponse memberJoinResponse = MEMBER1.toJoinResponse();
             
             assertThat(memberJoinResponse).isEqualTo(new MemberJoinResponse(1L));
         }
@@ -58,9 +54,7 @@ class MemberTest {
 
         @Test
         void 멤버조회_응답_리턴() {
-            Member member = TestMemberFactory.create();
-
-            MemberFindResponse memberFindResponse = member.toFindResponse();
+            MemberFindResponse memberFindResponse = MEMBER1.toFindResponse();
 
             assertThat(memberFindResponse).isEqualTo(new MemberFindResponse(1L, "memberName"));
         }

@@ -5,11 +5,13 @@ import hello.hellospring.domain.MemberRepository;
 import hello.hellospring.dto.MemberFindResponse;
 import hello.hellospring.dto.MemberJoinRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class MemberService {
     private final MemberRepository memberRepository;
 

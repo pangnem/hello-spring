@@ -5,11 +5,13 @@ import hello.hellospring.domain.MemberRepository;
 import hello.hellospring.domain.MemberTest;
 import hello.hellospring.dto.MemberFindResponse;
 import hello.hellospring.dto.MemberJoinRequest;
-import hello.hellospring.infra.MemoryMemberRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,15 +19,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
-class MemberServiceTest {
+@SpringBootTest
+@Transactional
+class MemberServiceIntegrationTest {
+    @Autowired
     private MemberRepository memberRepository;
+    @Autowired
     private MemberService memberService;
 
     @BeforeEach
     void setUp() {
-        this.memberRepository = new MemoryMemberRepository();
-        this.memberService = new MemberService(memberRepository);
-
         this.memberRepository.deleteAll();
     }
 
@@ -46,7 +49,7 @@ class MemberServiceTest {
 
                 Long join = memberService.join(memberJoinRequest);
 
-                assertThat(join).isEqualTo(1L);
+                assertThat(join).isGreaterThan(0L);
             }
         }
 
@@ -89,12 +92,12 @@ class MemberServiceTest {
 
             @Test
             void 찾은_회원_조회응답을_리턴한다() {
-                Member member = MemberTest.MEMBER1;
+                Member member = MemberTest.MEMBER2;
                 memberRepository.save(member);
 
-                MemberFindResponse memberFindResponse = memberService.findMember(1L);
+                MemberFindResponse memberFindResponse = memberService.findMember(member.id());
 
-                assertThat(memberFindResponse).isEqualTo(new MemberFindResponse(1L, "memberName"));
+                assertThat(memberFindResponse).isEqualTo(new MemberFindResponse(member.id(), "memberName"));
             }
         }
 
